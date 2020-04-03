@@ -1,21 +1,20 @@
 <?php 
 
-require_once("vendor/autoload.php");
+require_once("vendor/autoload.php"); //tras as dependencias do projetos o que o projeto precisa
 
-$app = new \Slim\Slim();
+use \Slim\Slim;
+use \Hcode\Page;
+
+$app = new Slim();   // sao namespaces --- carrega as classes que o projeto precisa
 
 $app->config('debug', true);
 
-$app->get('/', function() {
-	 
-	$sql = new Hcode\DB\Sql();
+$app->get('/', function(){
 
-	$results = $sql->select("SELECT * FROM tb_users");
-
-	echo json_encode($results);
-
+	$page = new Page();
+	$page->setTpl("index");
 });
 
-$app->run();
+$app->run();  /// tudo carregado -> roda o projeto
 
  ?>
